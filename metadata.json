@@ -1,0 +1,6 @@
+{
+  "name": "Dimensionamento Elétrico NBR 5410",
+  "description": "Calculadora profissional para dimensionamento de cabos, disjuntores, quedas de tensão e quadros de carga segundo a norma NBR 5410.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
