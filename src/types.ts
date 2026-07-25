@@ -1,4 +1,4 @@
-export type TabId = 'calculator' | 'panel' | 'qdc_builder' | 'diagrams' | 'quick_calc' | 'helpers' | 'guide';
+export type TabId = 'calculator' | 'panel' | 'qdc_builder' | 'diagrams' | 'quick_calc' | 'helpers' | 'guide' | 'profile';
 
 export type DINDeviceType = 'main_breaker' | 'circuit_breaker' | 'idr' | 'dps';
 

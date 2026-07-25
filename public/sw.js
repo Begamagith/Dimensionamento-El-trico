@@ -1,4 +1,4 @@
-const CACHE_NAME = 'nbr5410-qdc-v2';
+const CACHE_NAME = 'nbr5410-qdc-v3';
 const ASSETS_TO_CACHE = [
   '/',
   '/index.html',

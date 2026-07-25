@@ -7,6 +7,7 @@ import { DiagramsTab } from './components/DiagramsTab';
 import { HelpersTab } from './components/HelpersTab';
 import { QuickCalcTab } from './components/QuickCalcTab';
 import { GuideTab } from './components/GuideTab';
+import { ProfileTab } from './components/ProfileTab';
 import { calculateCircuit } from './utils/electricalCalculator';
 import { usePWAInstall } from './pwaRegister';
 import { useTheme } from './useTheme';
@@ -28,7 +29,8 @@ import {
   Menu,
   X,
   ChevronRight,
-  RefreshCw
+  RefreshCw,
+  UserCheck
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 
@@ -243,6 +245,13 @@ export default function App() {
       label: 'Norma NBR 5410',
       sublabel: 'Tabelas & Dados do Projeto',
       icon: BookOpen,
+      badge: null,
+    },
+    {
+      id: 'profile' as TabId,
+      label: 'Perfil do Eletricista',
+      sublabel: 'Cartão Digital & NBR',
+      icon: UserCheck,
       badge: null,
     },
   ];
@@ -645,6 +654,13 @@ export default function App() {
               <GuideTab
                 projectSettings={projectSettings}
                 onSaveSettings={setProjectSettings}
+              />
+            )}
+
+            {activeTab === 'profile' && (
+              <ProfileTab
+                projectSettings={projectSettings}
+                setProjectSettings={setProjectSettings}
               />
             )}
           </motion.div>

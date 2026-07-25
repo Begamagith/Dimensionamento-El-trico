@@ -1,24 +1,98 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
-  <rect width="512" height="512" rx="112" fill="#0f172a"/>
-  <!-- Glowing background gradient -->
   <defs>
+    <!-- Background Gradient -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#090d16"/>
+      <stop offset="50%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#1e1b4b"/>
+    </linearGradient>
+
+    <!-- Glowing Radial Backdrop -->
+    <radialGradient id="glowRad" cx="50%" cy="45%" r="50%">
+      <stop offset="0%" stop-color="#f59e0b" stop-opacity="0.3"/>
+      <stop offset="60%" stop-color="#6366f1" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Shield / Core Gradient -->
+    <linearGradient id="shieldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#312e81"/>
+      <stop offset="50%" stop-color="#1e1b4b"/>
+      <stop offset="100%" stop-color="#0f172a"/>
+    </linearGradient>
+
+    <!-- Electric Orange / Amber Bolt Gradient -->
     <linearGradient id="boltGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#fbbf24"/>
-      <stop offset="100%" stop-color="#f59e0b"/>
+      <stop offset="0%" stop-color="#fff7ed"/>
+      <stop offset="30%" stop-color="#fde047"/>
+      <stop offset="70%" stop-color="#f97316"/>
+      <stop offset="100%" stop-color="#ea580c"/>
     </linearGradient>
-    <linearGradient id="shieldGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" stop-color="#6366f1"/>
-      <stop offset="100%" stop-color="#4338ca"/>
+
+    <!-- Neon Indigo Accent -->
+    <linearGradient id="accentGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#818cf8"/>
+      <stop offset="100%" stop-color="#c084fc"/>
     </linearGradient>
+
+    <!-- Glassmorphism Highlight Gradient -->
+    <linearGradient id="glassGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.25"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.02"/>
+    </linearGradient>
+
+    <!-- Glow Filter -->
+    <filter id="electricGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="8" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
   </defs>
-  <!-- Outer Shield -->
-  <path d="M256 64 L384 112 V256 C384 340 328 412 256 448 C184 412 128 340 128 256 V112 Z" fill="url(#shieldGrad)" stroke="#818cf8" stroke-width="8"/>
-  <!-- Inner Circuit Breaker Lines -->
-  <rect x="206" y="160" width="100" height="180" rx="16" fill="#1e293b" stroke="#334155" stroke-width="6"/>
-  <!-- Switch Lever -->
-  <rect x="226" y="180" width="60" height="60" rx="10" fill="#10b981"/>
-  <!-- Lightning Bolt -->
-  <path d="M266 200 L226 270 H266 L246 320 L296 250 H256 L266 200 Z" fill="url(#boltGrad)" stroke="#b45309" stroke-width="2"/>
-  <!-- NBR 5410 Text -->
-  <text x="256" y="400" font-family="system-ui, sans-serif" font-weight="900" font-size="32" fill="#ffffff" text-anchor="middle" letter-spacing="2">NBR 5410</text>
+
+  <!-- Base Squircle Shape -->
+  <rect width="512" height="512" rx="112" fill="url(#bgGrad)"/>
+  
+  <!-- Subtle Ambient Glow -->
+  <rect width="512" height="512" rx="112" fill="url(#glowRad)"/>
+
+  <!-- Outer Glass Border Rim -->
+  <rect x="16" y="16" width="480" height="480" rx="96" fill="none" stroke="url(#glassGrad)" stroke-width="4"/>
+
+  <!-- Shield Badge Frame -->
+  <path d="M256 72 L384 120 V248 C384 340 328 412 256 448 C184 412 128 340 128 248 V120 Z" 
+        fill="url(#shieldGrad)" stroke="url(#accentGrad)" stroke-width="6" />
+
+  <!-- Shield Glass Inner Reflection -->
+  <path d="M256 84 L372 128 V248 C372 320 320 384 256 426 Z" 
+        fill="url(#glassGrad)" opacity="0.3" />
+
+  <!-- Circuit Trace Nodes & Lines -->
+  <g stroke="#6366f1" stroke-width="3" stroke-linecap="round" opacity="0.6">
+    <line x1="160" y1="180" x2="200" y2="180" />
+    <circle cx="160" cy="180" r="5" fill="#818cf8" />
+    
+    <line x1="352" y1="180" x2="312" y2="180" />
+    <circle cx="352" cy="180" r="5" fill="#818cf8" />
+
+    <line x1="180" y1="320" x2="210" y2="320" />
+    <circle cx="180" cy="320" r="5" fill="#818cf8" />
+
+    <line x1="332" y1="320" x2="302" y2="320" />
+    <circle cx="332" cy="320" r="5" fill="#818cf8" />
+  </g>
+
+  <!-- Circuit Breaker Box Centerpiece -->
+  <rect x="206" y="152" width="100" height="184" rx="20" fill="#090d16" stroke="#475569" stroke-width="5" />
+  <rect x="222" y="168" width="68" height="72" rx="12" fill="#1e293b" stroke="#334155" stroke-width="3" />
+  <rect x="238" y="184" width="36" height="40" rx="8" fill="#10b981" />
+
+  <!-- Dynamic Glowing Lightning Bolt -->
+  <path d="M272 128 L196 256 H260 L236 376 L324 236 H260 L272 128 Z" 
+        fill="url(#boltGrad)" 
+        stroke="#7c2d12" 
+        stroke-width="2" 
+        filter="url(#electricGlow)" />
+
+  <!-- Emblem Text -->
+  <rect x="186" y="396" width="140" height="30" rx="15" fill="#0f172a" stroke="url(#accentGrad)" stroke-width="2"/>
+  <text x="256" y="416" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-weight="900" font-size="14" fill="#f8fafc" text-anchor="middle" letter-spacing="3">NBR 5410</text>
 </svg>
