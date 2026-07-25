@@ -30,7 +30,10 @@ import {
   X,
   ChevronRight,
   RefreshCw,
-  UserCheck
+  UserCheck,
+  ExternalLink,
+  Copy,
+  Check
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 
@@ -145,6 +148,8 @@ const INITIAL_PROJECT_SETTINGS: ProjectSettings = {
 export default function App() {
   const [activeTab, setActiveTab] = useState<TabId>('calculator');
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState<boolean>(false);
+  const [isApkModalOpen, setIsApkModalOpen] = useState<boolean>(false);
+  const [copiedUrl, setCopiedUrl] = useState<boolean>(false);
   const {
     isInstallable,
     isInstalled,
@@ -564,16 +569,27 @@ export default function App() {
 
               {/* Drawer Footer Actions */}
               <div className="p-4 border-t border-slate-100 dark:border-slate-800 bg-slate-50 dark:bg-slate-900/90 space-y-3">
+                <button
+                  onClick={() => {
+                    setIsApkModalOpen(true);
+                    setIsMobileMenuOpen(false);
+                  }}
+                  className="w-full py-3 px-4 bg-gradient-to-r from-orange-600 to-amber-600 hover:from-orange-500 hover:to-amber-500 text-white font-extrabold text-xs rounded-xl transition-all flex items-center justify-center gap-2 cursor-pointer shadow-sm min-h-[44px]"
+                >
+                  <Smartphone className="w-4 h-4 text-white" />
+                  <span>Baixar APK / Instalar no Android</span>
+                </button>
+
                 {isInstallable && (
                   <button
                     onClick={() => {
                       triggerInstall();
                       setIsMobileMenuOpen(false);
                     }}
-                    className="w-full py-3 px-4 bg-orange-600 hover:bg-orange-700 text-white font-bold text-xs rounded-xl transition-all flex items-center justify-center gap-2 cursor-pointer shadow-sm min-h-[44px]"
+                    className="w-full py-2.5 px-4 bg-orange-600 hover:bg-orange-700 text-white font-bold text-xs rounded-xl transition-all flex items-center justify-center gap-2 cursor-pointer shadow-sm min-h-[44px]"
                   >
                     <Download className="w-4 h-4 text-white animate-bounce" />
-                    <span>Instalar PWA no Dispositivo</span>
+                    <span>Instalar PWA Direto</span>
                   </button>
                 )}
 
@@ -666,6 +682,133 @@ export default function App() {
           </motion.div>
         </AnimatePresence>
       </main>
+
+      {/* Modal para Gerar / Instalar APK Android */}
+      <AnimatePresence>
+        {isApkModalOpen && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/80 backdrop-blur-sm">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: 10 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 10 }}
+              className="bg-white dark:bg-slate-900 w-full max-w-lg rounded-3xl p-6 shadow-2xl border border-slate-200 dark:border-slate-800 space-y-5 relative max-h-[90vh] overflow-y-auto"
+            >
+              <button
+                onClick={() => setIsApkModalOpen(false)}
+                className="absolute top-5 right-5 p-2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-all cursor-pointer"
+              >
+                <X className="w-5 h-5" />
+              </button>
+
+              <div className="flex items-center gap-3 pr-8">
+                <div className="w-12 h-12 rounded-2xl bg-orange-100 dark:bg-orange-950/80 border border-orange-200 dark:border-orange-800 flex items-center justify-center shrink-0">
+                  <Smartphone className="w-6 h-6 text-orange-600 dark:text-orange-400" />
+                </div>
+                <div>
+                  <h3 className="text-lg font-black text-slate-900 dark:text-slate-100">
+                    Instalar / Gerar APK Android
+                  </h3>
+                  <p className="text-xs text-slate-500 dark:text-slate-400">
+                    Transforme a Calculadora NBR 5410 em um aplicativo nativo no celular
+                  </p>
+                </div>
+              </div>
+
+              {/* OPÇÃO 1: INSTALAÇÃO NATIVA PWA (SEM BAIXAR APK) */}
+              <div className="bg-slate-50 dark:bg-slate-800/60 p-4 rounded-2xl border border-slate-200 dark:border-slate-700/80 space-y-3">
+                <div className="flex items-center gap-2 text-xs font-black text-slate-900 dark:text-slate-100 uppercase tracking-wider">
+                  <Sparkles className="w-4 h-4 text-orange-500" />
+                  <span>Opção 1: Instalação Direta (PWA Nativo)</span>
+                </div>
+
+                <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+                  Este app é um <strong>PWA (Progressive Web App)</strong> nativo. Ao instalar pelo Chrome no Android, ele cria o ícone oficial na tela inicial, roda sem barra do navegador e funciona <strong>100% Offline</strong>!
+                </p>
+
+                <ol className="text-xs text-slate-600 dark:text-slate-300 space-y-1.5 list-decimal pl-4">
+                  <li>No Chrome do celular, toque nos <strong>3 pontinhos (⋮)</strong> no canto superior.</li>
+                  <li>Selecione <strong>"Adicionar à Tela Inicial"</strong> ou <strong>"Instalar Aplicativo"</strong>.</li>
+                  <li>Confirme e o ícone oficial do raio ⚡ aparecerá na tela inicial como qualquer app da Play Store!</li>
+                </ol>
+
+                {isInstallable && (
+                  <button
+                    onClick={() => {
+                      triggerInstall();
+                      setIsApkModalOpen(false);
+                    }}
+                    className="w-full py-2.5 px-4 bg-orange-600 hover:bg-orange-500 text-white font-bold text-xs rounded-xl shadow-md transition-all flex items-center justify-center gap-2 cursor-pointer"
+                  >
+                    <Download className="w-4 h-4 animate-bounce" />
+                    <span>Instalar Agora no Meu Android</span>
+                  </button>
+                )}
+              </div>
+
+              {/* OPÇÃO 2: GERAR ARQUIVO .APK FÍSICO VIA PWABUILDER */}
+              <div className="bg-slate-50 dark:bg-slate-800/60 p-4 rounded-2xl border border-slate-200 dark:border-slate-700/80 space-y-3">
+                <div className="flex items-center gap-2 text-xs font-black text-slate-900 dark:text-slate-100 uppercase tracking-wider">
+                  <Download className="w-4 h-4 text-emerald-500" />
+                  <span>Opção 2: Gerar Arquivo .APK / .AAB</span>
+                </div>
+
+                <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+                  Se precisa do arquivo <strong>.apk</strong> compilado para enviar via WhatsApp ou publicar na Google Play Store, use o serviço oficial da Microsoft:
+                </p>
+
+                <div className="space-y-2">
+                  <div className="flex items-center gap-2">
+                    <input
+                      type="text"
+                      readOnly
+                      value={typeof window !== 'undefined' ? window.location.href : ''}
+                      className="w-full px-3 py-2 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl text-xs font-mono text-slate-700 dark:text-slate-300 focus:outline-none"
+                    />
+                    <button
+                      onClick={() => {
+                        if (typeof window !== 'undefined') {
+                          navigator.clipboard.writeText(window.location.href);
+                          setCopiedUrl(true);
+                          setTimeout(() => setCopiedUrl(false), 2500);
+                        }
+                      }}
+                      className="px-3 py-2 bg-slate-200 dark:bg-slate-700 hover:bg-slate-300 dark:hover:bg-slate-600 text-slate-800 dark:text-slate-200 font-bold text-xs rounded-xl transition-all shrink-0 cursor-pointer flex items-center gap-1"
+                    >
+                      {copiedUrl ? <Check className="w-4 h-4 text-emerald-500" /> : <Copy className="w-4 h-4" />}
+                      <span>{copiedUrl ? 'Copiado!' : 'Copiar URL'}</span>
+                    </button>
+                  </div>
+
+                  <ol className="text-xs text-slate-600 dark:text-slate-300 space-y-1.5 list-decimal pl-4">
+                    <li>Copie o link acima.</li>
+                    <li>Acesse o site gratuito <strong>www.pwabuilder.com</strong></li>
+                    <li>Cole a URL e clique em <strong>"Package for Android"</strong> para baixar o APK pronto!</li>
+                  </ol>
+
+                  <a
+                    href="https://www.pwabuilder.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full py-2.5 px-4 bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs rounded-xl shadow-md transition-all flex items-center justify-center gap-2 cursor-pointer mt-2"
+                  >
+                    <span>Abrir PWABuilder.com</span>
+                    <ExternalLink className="w-4 h-4" />
+                  </a>
+                </div>
+              </div>
+
+              <div className="pt-2 text-center">
+                <button
+                  onClick={() => setIsApkModalOpen(false)}
+                  className="text-xs font-bold text-slate-500 dark:text-slate-400 hover:underline cursor-pointer"
+                >
+                  Fechar Janela
+                </button>
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
 
       {/* Footer */}
       <footer className="border-t border-slate-200/80 bg-white py-4 mt-auto">
