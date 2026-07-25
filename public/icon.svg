@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <rect width="512" height="512" rx="112" fill="#0f172a"/>
+  <!-- Glowing background gradient -->
+  <defs>
+    <linearGradient id="boltGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fbbf24"/>
+      <stop offset="100%" stop-color="#f59e0b"/>
+    </linearGradient>
+    <linearGradient id="shieldGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#6366f1"/>
+      <stop offset="100%" stop-color="#4338ca"/>
+    </linearGradient>
+  </defs>
+  <!-- Outer Shield -->
+  <path d="M256 64 L384 112 V256 C384 340 328 412 256 448 C184 412 128 340 128 256 V112 Z" fill="url(#shieldGrad)" stroke="#818cf8" stroke-width="8"/>
+  <!-- Inner Circuit Breaker Lines -->
+  <rect x="206" y="160" width="100" height="180" rx="16" fill="#1e293b" stroke="#334155" stroke-width="6"/>
+  <!-- Switch Lever -->
+  <rect x="226" y="180" width="60" height="60" rx="10" fill="#10b981"/>
+  <!-- Lightning Bolt -->
+  <path d="M266 200 L226 270 H266 L246 320 L296 250 H256 L266 200 Z" fill="url(#boltGrad)" stroke="#b45309" stroke-width="2"/>
+  <!-- NBR 5410 Text -->
+  <text x="256" y="400" font-family="system-ui, sans-serif" font-weight="900" font-size="32" fill="#ffffff" text-anchor="middle" letter-spacing="2">NBR 5410</text>
+</svg>

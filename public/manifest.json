@@ -1,0 +1,32 @@
+{
+  "short_name": "NBR 5410 & QDC",
+  "name": "Dimensionador Elétrico NBR 5410 & QDC",
+  "icons": [
+    {
+      "src": "/pwa-icon.png",
+      "type": "image/png",
+      "sizes": "192x192",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/pwa-icon.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon.svg",
+      "type": "image/svg+xml",
+      "sizes": "any",
+      "purpose": "any maskable"
+    }
+  ],
+  "start_url": "/",
+  "background_color": "#0f172a",
+  "theme_color": "#4f46e5",
+  "display": "standalone",
+  "orientation": "portrait",
+  "description": "Calculadora e Dimensionador de Circuitos Elétricos, Disjuntores, QDC e Esquemas Unifilares segundo a NBR 5410.",
+  "lang": "pt-BR",
+  "categories": ["utilities", "productivity", "engineering"]
+}
